@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Configuration;
 using System.Data.SqlClient;
 
 namespace Projeto.Repository
@@ -17,6 +18,7 @@ namespace Projeto.Repository
             try
             {
                 Con = new SqlConnection("Data Source=PCGLAUCIA\\SQLSERVER14;Initial Catalog=master;Integrated Security=True");
+                //Con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ProjetoCRUD"].ConnectionString);
                 Con.Open();
             }
             catch (Exception e)
