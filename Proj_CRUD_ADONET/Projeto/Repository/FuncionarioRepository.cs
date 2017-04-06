@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
 using Projeto.Models; //importando o modelo da Classe: Funcionario
 
 namespace Projeto.Repository
@@ -87,6 +86,42 @@ namespace Projeto.Repository
             {
                 FecharConexao();
             }           
+        }
+
+        // Método: Update
+        public bool AtualizarFuncionario(Funcionario func)
+        {
+            try
+            {
+                AbrirConexao();
+                Cmd = new SqlCommand("AtualizarFuncionario", Con);
+                Cmd.CommandType = CommandType.StoredProcedure;
+                Cmd.Parameters.AddWithValue("@IdFuncionario", func.IdFuncionario);
+                Cmd.Parameters.AddWithValue("@Nome", func.Nome);
+                Cmd.Parameters.AddWithValue("@Sobrenome", func.Sobrenome);
+                Cmd.Parameters.AddWithValue("@Endereco", func.Endereco);
+                Cmd.Parameters.AddWithValue("@Cidade", func.Cidade);
+                Cmd.Parameters.AddWithValue("@Email", func.Email);
+
+                int i = Cmd.ExecuteNonQuery();
+
+                if (i >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao Atualizar Funcionário: " + e.Message);
+            }
+            finally
+            {
+                FecharConexao();
+            }
         }
     }
 }
