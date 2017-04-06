@@ -123,5 +123,36 @@ namespace Projeto.Repository
                 FecharConexao();
             }
         }
+
+        // Método: Delete
+        public bool ExcluirFuncionario(int Id)
+        {
+            try
+            {
+                AbrirConexao();
+                Cmd = new SqlCommand("DeletarFuncionarioPorId", Con);
+                Cmd.CommandType = CommandType.StoredProcedure;
+                Cmd.Parameters.AddWithValue("@IdFuncionario", Con);
+
+                int i = Cmd.ExecuteNonQuery();
+
+                if (i >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao excluir Funcionário: " + e.Message);
+            }
+            finally
+            {
+                FecharConexao();
+            }
+        }
     }
 }
