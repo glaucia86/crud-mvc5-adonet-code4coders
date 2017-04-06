@@ -12,4 +12,5 @@ Desenvolvimento de uma aplicação em MVC5 + ADO.NET explicando as suas vantagen
 - MVC 5;
 - Bootstrap 3;
 - Framework 4.6;
+- Conexão de Dados via SqlClient;
 
