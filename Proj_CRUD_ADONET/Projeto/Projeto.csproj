@@ -101,6 +101,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Funcionario\SelecionarFuncionarios.cshtml" />
+    <Content Include="Views\Funcionario\AtualizarFuncionario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
