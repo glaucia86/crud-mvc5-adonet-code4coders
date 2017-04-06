@@ -1,36 +1,43 @@
 ﻿using System.Web.Mvc;
+using Projeto.Models;
+using Projeto.Repository;
 
 namespace Projeto.Controllers
 {
     public class FuncionarioController : Controller
     {
-        // GET: Funcionario
-        public ActionResult Index()
+        // GET: Funcionario/SelecionarFuncionarios
+        public ActionResult SelecionarFuncionarios()
+        {
+            var funcRepository = new FuncionarioRepository();
+            ModelState.Clear();
+
+            return View(funcRepository.SelecionarFuncionarios());
+        }
+
+        // GET: Funcionario/AdicionarFuncionario
+        public ActionResult AdicionarFuncionario()
         {
             return View();
         }
 
-        // GET: Funcionario/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Funcionario/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Funcionario/Create
+        // POST: Funcionario/AdicionarFuncionario
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult AdicionarFuncionario(Funcionario func)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var funcRepository = new FuncionarioRepository();
 
-                return RedirectToAction("Index");
+                    if (funcRepository.AdicionarFuncionario(func))
+                    {
+                        ViewBag.Message = "Funcionário criado com sucesso!";
+                    }
+                }
+
+                return View();
             }
             catch
             {
@@ -38,21 +45,25 @@ namespace Projeto.Controllers
             }
         }
 
-        // GET: Funcionario/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Funcionario/AtualizarFuncionario/5
+        public ActionResult AtualizarFuncionario(int id)
         {
-            return View();
+            var funcRepository = new FuncionarioRepository();
+
+            return View(funcRepository.SelecionarFuncionarios()
+                            .Find(func => func.IdFuncionario == id));
         }
 
         // POST: Funcionario/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult AtualizarFuncionario(int id, Funcionario funcionario)
         {
             try
             {
-                // TODO: Add update logic here
+                var funcRepository = new FuncionarioRepository();
+                funcRepository.AtualizarFuncionario(funcionario);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("SelecionarFuncionarios");
             }
             catch
             {
@@ -60,21 +71,19 @@ namespace Projeto.Controllers
             }
         }
 
-        // GET: Funcionario/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Funcionario/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        // GET: Funcionario/ExcluirFuncionario/5
+        public ActionResult ExcluirFuncionario(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                var funcRepository = new FuncionarioRepository();
 
-                return RedirectToAction("Index");
+                if (funcRepository.ExcluirFuncionario(id))
+                {
+                    ViewBag.AlertMsg = "Funcionário excluído com sucesso.";
+                }
+
+                return RedirectToAction("SelecionarFuncionarios");
             }
             catch
             {
