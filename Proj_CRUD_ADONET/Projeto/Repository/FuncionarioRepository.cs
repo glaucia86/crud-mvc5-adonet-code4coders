@@ -18,6 +18,7 @@ namespace Projeto.Repository
                 //Aqui estou chamando a procedure:
                 Cmd = new SqlCommand("AdicionarNovoFuncionario", Con);
                 Cmd.CommandType = CommandType.StoredProcedure;
+
                 Cmd.Parameters.AddWithValue("@Nome", func.Nome);
                 Cmd.Parameters.AddWithValue("@Sobrenome", func.Sobrenome);
                 Cmd.Parameters.AddWithValue("Cidade", func.Cidade);
@@ -95,8 +96,9 @@ namespace Projeto.Repository
             {
                 AbrirConexao();
                 Cmd = new SqlCommand("AtualizarFuncionario", Con);
+
                 Cmd.CommandType = CommandType.StoredProcedure;
-                Cmd.Parameters.AddWithValue("@IdFuncionario", func.IdFuncionario);
+                Cmd.Parameters.AddWithValue("@FuncionarioId", func.IdFuncionario);
                 Cmd.Parameters.AddWithValue("@Nome", func.Nome);
                 Cmd.Parameters.AddWithValue("@Sobrenome", func.Sobrenome);
                 Cmd.Parameters.AddWithValue("@Endereco", func.Endereco);
@@ -132,7 +134,7 @@ namespace Projeto.Repository
                 AbrirConexao();
                 Cmd = new SqlCommand("DeletarFuncionarioPorId", Con);
                 Cmd.CommandType = CommandType.StoredProcedure;
-                Cmd.Parameters.AddWithValue("@IdFuncionario", Con);
+                Cmd.Parameters.AddWithValue("@FuncionarioId", Con);
 
                 int i = Cmd.ExecuteNonQuery();
 

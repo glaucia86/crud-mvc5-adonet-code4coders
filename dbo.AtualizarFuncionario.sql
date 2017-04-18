@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[AtualizarFuncionario]
 (
-	@IdFuncionario int,
+	@FuncionarioId int,
 	@Nome nvarchar(50),
 	@Sobrenome nvarchar(50),
 	@Endereco nvarchar(50),
@@ -14,5 +14,5 @@ AS BEGIN
 		Cidade		= @Cidade,
 		Endereco	= @Endereco,
 		Email		= @Email
-	where Id = @IdFuncionario
-END	
+	where Id = @FuncionarioId
+END

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[DeletarFuncionarioPorId]
+﻿CREATE PROCEDURE [dbo].[DeletarFuncionarioPorId]
 (
 	@FuncionarioId int
 )
