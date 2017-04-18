@@ -133,8 +133,9 @@ namespace Projeto.Repository
             {
                 AbrirConexao();
                 Cmd = new SqlCommand("DeletarFuncionarioPorId", Con);
+
                 Cmd.CommandType = CommandType.StoredProcedure;
-                Cmd.Parameters.AddWithValue("@FuncionarioId", Con);
+                Cmd.Parameters.AddWithValue("@FuncionarioId", Id);
 
                 int i = Cmd.ExecuteNonQuery();
 
